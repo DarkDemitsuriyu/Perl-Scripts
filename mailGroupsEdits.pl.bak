@@ -43,6 +43,14 @@ foreach my $entry ($search->entries) {
 	}
 }
 
+my $smtp = Net::SMTP->new('mail.company.ru');
+$smtp->mail('fax@company.ru');
+$smtp->to('my@company.ru');
+$smtp->data();
+$smtp->datasend("From: postmas\@company.ru\nSubject: Test\n\nvse OK!\n");
+$smtp->dataend();
+$smtp->quit;
+
 $ldap->unbind;
 $cli->Logout();
 exit;
